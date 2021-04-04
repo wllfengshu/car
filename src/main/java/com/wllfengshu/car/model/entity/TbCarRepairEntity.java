@@ -1,4 +1,4 @@
-package com.wllfengshu.car.entity;
+package com.wllfengshu.car.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -23,7 +23,7 @@ public class TbCarRepairEntity implements Serializable {
     private Integer id;
 
     /**
-    * 
+    * 故障原因编码id
     */
     private Integer faultReasonDictId;
 

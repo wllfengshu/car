@@ -1,6 +1,8 @@
-package com.wllfengshu.car.entity;
+package com.wllfengshu.car.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.wllfengshu.car.utils.DoubleSerializeUtil;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -9,8 +11,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@Table(name = "tb_user")
-public class TbUserEntity implements Serializable {
+@Table(name = "tb_car")
+public class TbCarEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,59 +23,41 @@ public class TbUserEntity implements Serializable {
     private Integer id;
 
     /**
-    * 姓名
+    * 车牌
     */
-    private String name;
+    private String licensePlate;
 
     /**
-    * 登陆名
+    * 品牌
     */
-    private String loginName;
+    private String brand;
 
     /**
-    * 密码
+    * 型号
     */
-    private String password;
+    private String model;
 
     /**
-    * 年龄
+    * 颜色
     */
-    private Integer age;
+    private String colour;
 
     /**
-    * 电话
+    * 购买日期
     */
-    private String phone;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date buyTime;
 
     /**
-    * 微信
+    * 价格(单价万)
     */
-    private String wechat;
+    @JsonSerialize(using = DoubleSerializeUtil.class)
+    private Double price;
 
     /**
-    * QQ
+    * 客户id
     */
-    private String qq;
-
-    /**
-    * 其他联系人1
-    */
-    private String otherContacts1;
-
-    /**
-    * 其他联系人2
-    */
-    private String otherContacts2;
-
-    /**
-    * 住址
-    */
-    private String address;
-
-    /**
-    * 岗位
-    */
-    private String post;
+    private Integer customerId;
 
     /**
     * 备注

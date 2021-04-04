@@ -1,7 +1,8 @@
 package com.wllfengshu.car.rest;
 
-import com.wllfengshu.car.entity.TbUserEntity;
 import com.wllfengshu.car.exception.CustomException;
+import com.wllfengshu.car.model.dto.LoginDTO;
+import com.wllfengshu.car.model.entity.TbUserEntity;
 import com.wllfengshu.car.service.TbUserService;
 import io.swagger.annotations.*;
 import lombok.NonNull;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Api(value = "tbUser Rest",tags = "tbUser管理")
@@ -92,7 +94,7 @@ public class TbUserRest {
     @ApiOperation(value = "查询列表", httpMethod = "GET")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "页数(从0开始，默认0)", example = "0", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页的数量(默认10)", example = "0", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页的数量(默认10)", example = "10", dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "sessionId", value = "SessionId", required = true, dataType = "string", paramType = "header")
     })
     @ApiResponses({
@@ -106,9 +108,22 @@ public class TbUserRest {
             HttpServletRequest request,
             HttpServletResponse response) throws CustomException {
         Map<String, Object> params = new HashMap<>();
-        params.put("pageNo", pageNo);
-        params.put("pageSize", pageSize);
         log.info("selects params{}", params);
-        return tbUserService.selects(params, sessionId);
+        return tbUserService.selects(params, pageNo, pageSize, sessionId);
+    }
+
+    @ApiOperation(value = "登陆", httpMethod = "POST")
+    @PostMapping("/tbUser/login")
+    public Map<String, Object> login(@RequestBody LoginDTO loginDTO) throws CustomException {
+        log.info("login loginName:{}", loginDTO.getLoginName());
+        return tbUserService.login(loginDTO);
+    }
+
+    @ApiOperation(value = "登出", httpMethod = "POST")
+    @ApiImplicitParam(name = "sessionId", value = "SessionId", required = true, dataType = "string", paramType = "header")
+    @PostMapping("/tbUser/logout")
+    public Map<String, Object> logout(@RequestHeader(value = "sessionId") String sessionId) throws CustomException {
+        log.info("logout sessionId:{}", sessionId);
+        return tbUserService.logout(sessionId);
     }
 }

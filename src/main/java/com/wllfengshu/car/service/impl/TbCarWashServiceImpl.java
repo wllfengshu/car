@@ -1,7 +1,7 @@
 package com.wllfengshu.car.service.impl;
 
 import com.wllfengshu.car.dao.TbCarWashDAO;
-import com.wllfengshu.car.entity.TbCarWashEntity;
+import com.wllfengshu.car.model.entity.TbCarWashEntity;
 import com.wllfengshu.car.exception.CustomException;
 import com.wllfengshu.car.service.TbCarWashService;
 import lombok.NonNull;

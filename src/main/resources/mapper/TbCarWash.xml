@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wllfengshu.car.dao.TbCarWashDAO" >
 
-    <resultMap id="baseResultMap" type="com.wllfengshu.car.entity.TbCarWashEntity">
+    <resultMap id="baseResultMap" type="com.wllfengshu.car.model.entity.TbCarWashEntity">
         <result column="id" property="id"/>
         <result column="price" property="price"/>
         <result column="customer_id" property="customerId"/>

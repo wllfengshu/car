@@ -29,7 +29,7 @@ spring:
     connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
-  type-aliases-package: com.wllfengshu.car.entity
+  type-aliases-package: com.wllfengshu.car.model.entity
   configuration:
     map-underscore-to-camel-case: true
 mapper:

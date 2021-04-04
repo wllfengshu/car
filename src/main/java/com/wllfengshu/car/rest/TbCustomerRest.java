@@ -1,6 +1,6 @@
 package com.wllfengshu.car.rest;
 
-import com.wllfengshu.car.entity.TbCustomerEntity;
+import com.wllfengshu.car.model.entity.TbCustomerEntity;
 import com.wllfengshu.car.exception.CustomException;
 import com.wllfengshu.car.service.TbCustomerService;
 import io.swagger.annotations.*;
@@ -91,8 +91,13 @@ public class TbCustomerRest {
 
     @ApiOperation(value = "查询列表", httpMethod = "GET")
     @ApiImplicitParams({
+            @ApiImplicitParam(name = "customerName", value = "客户姓名", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "customerNickname", value = "客户昵称", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "phone", value = "电话", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "otherContacts", value = "其他联系人", dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "licensePlate", value = "车牌", dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "pageNo", value = "页数(从0开始，默认0)", example = "0", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页的数量(默认10)", example = "0", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页的数量(默认10)", example = "10", dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "sessionId", value = "SessionId", required = true, dataType = "string", paramType = "header")
     })
     @ApiResponses({

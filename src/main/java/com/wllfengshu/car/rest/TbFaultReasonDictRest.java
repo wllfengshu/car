@@ -1,6 +1,6 @@
 package com.wllfengshu.car.rest;
 
-import com.wllfengshu.car.entity.TbFaultReasonDictEntity;
+import com.wllfengshu.car.model.entity.TbFaultReasonDictEntity;
 import com.wllfengshu.car.exception.CustomException;
 import com.wllfengshu.car.service.TbFaultReasonDictService;
 import io.swagger.annotations.*;
@@ -92,7 +92,7 @@ public class TbFaultReasonDictRest {
     @ApiOperation(value = "查询列表", httpMethod = "GET")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "页数(从0开始，默认0)", example = "0", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页的数量(默认10)", example = "0", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页的数量(默认10)", example = "10", dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "sessionId", value = "SessionId", required = true, dataType = "string", paramType = "header")
     })
     @ApiResponses({
@@ -106,9 +106,7 @@ public class TbFaultReasonDictRest {
             HttpServletRequest request,
             HttpServletResponse response) throws CustomException {
         Map<String, Object> params = new HashMap<>();
-        params.put("pageNo", pageNo);
-        params.put("pageSize", pageSize);
         log.info("selects params{}", params);
-        return tbFaultReasonDictService.selects(params, sessionId);
+        return tbFaultReasonDictService.selects(params, pageNo, pageSize, sessionId);
     }
 }

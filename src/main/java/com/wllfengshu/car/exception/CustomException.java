@@ -11,18 +11,16 @@ public class CustomException extends Exception {
 
     public enum ExceptionName {
         //没有权限
-        Unauthenticated(401),
+        UNAUTHENTICATED(401),
         //非法参数
-        IllegalParam(400),
+        ILLEGAL_PARAM(400),
 
-        //请求Security超时
-        SecurityFailed(14001),
-        //请求Operation超时
-        OperationFailed(14002),
-        //进行get请求失败
-        HttpDoGetFailed(14003),
-        //进行post请求失败
-        HttpDoPostFailed(14004);
+        //用户名或者密码不能为空
+        NOTNULL_USERNAME_OR_PASSWORD(10001),
+        //用户名或者密码错误
+        INVALID_USERNAME_OR_PASSWORD(10002),
+
+        ;
 
         private int code;
 

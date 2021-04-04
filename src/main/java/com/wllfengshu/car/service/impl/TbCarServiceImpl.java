@@ -1,7 +1,8 @@
 package com.wllfengshu.car.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.wllfengshu.car.dao.TbCarDAO;
-import com.wllfengshu.car.entity.TbCarEntity;
+import com.wllfengshu.car.model.entity.TbCarEntity;
 import com.wllfengshu.car.exception.CustomException;
 import com.wllfengshu.car.service.TbCarService;
 import lombok.NonNull;
@@ -56,9 +57,11 @@ public class TbCarServiceImpl implements TbCarService {
     }
 
     @Override
-    public Map<String, Object> selects(Map<String, Object> params, String sessionId) throws CustomException {
+    public Map<String, Object> selects(Map<String, Object> params, Integer pageNo, Integer pageSize, String sessionId) throws CustomException {
         log.info("selects params:{}", params);
         Map<String, Object> result = new HashMap<>();
+        PageHelper.startPage(pageNo, pageSize);
+        result.put("data", tbCarDAO.selectAll());
         return result;
     }
 

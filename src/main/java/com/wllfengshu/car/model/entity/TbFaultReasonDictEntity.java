@@ -1,4 +1,4 @@
-package com.wllfengshu.car.entity;
+package com.wllfengshu.car.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

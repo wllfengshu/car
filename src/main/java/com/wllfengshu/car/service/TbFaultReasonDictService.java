@@ -1,6 +1,6 @@
 package com.wllfengshu.car.service;
 
-import com.wllfengshu.car.entity.TbFaultReasonDictEntity;
+import com.wllfengshu.car.model.entity.TbFaultReasonDictEntity;
 import com.wllfengshu.car.exception.CustomException;
 
 import java.util.Map;
@@ -15,6 +15,6 @@ public interface TbFaultReasonDictService {
 
     Map<String, Object> select(Integer id, String sessionId) throws CustomException;
 
-    Map<String, Object> selects(Map<String, Object> params, String sessionId) throws CustomException;
+    Map<String, Object> selects(Map<String, Object> params, Integer pageNo, Integer pageSize, String sessionId) throws CustomException;
 
 }

@@ -1,6 +1,6 @@
 package com.wllfengshu.car.service;
 
-import com.wllfengshu.car.entity.TbCarWashEntity;
+import com.wllfengshu.car.model.entity.TbCarWashEntity;
 import com.wllfengshu.car.exception.CustomException;
 
 import java.util.Map;

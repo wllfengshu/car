@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wllfengshu.car.dao.TbUserDAO" >
 
-    <resultMap id="baseResultMap" type="com.wllfengshu.car.entity.TbUserEntity">
+    <resultMap id="baseResultMap" type="com.wllfengshu.car.model.entity.TbUserEntity">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="login_name" property="loginName"/>
