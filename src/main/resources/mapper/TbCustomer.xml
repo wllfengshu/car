@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wllfengshu.car.dao.TbCustomerDAO" >
+
+    <resultMap id="baseResultMap" type="com.wllfengshu.car.entity.TbCustomerEntity">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="nickname" property="nickname"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="has_marry" property="hasMarry"/>
+        <result column="phone1" property="phone1"/>
+        <result column="phone2" property="phone2"/>
+        <result column="phone3" property="phone3"/>
+        <result column="wechat" property="wechat"/>
+        <result column="qq" property="qq"/>
+        <result column="other_contacts1" property="otherContacts1"/>
+        <result column="other_contacts2" property="otherContacts2"/>
+        <result column="address" property="address"/>
+        <result column="company" property="company"/>
+        <result column="company_address" property="companyAddress"/>
+        <result column="occupation" property="occupation"/>
+        <result column="salary" property="salary"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="baseQueryWhere">
+
+    </sql>
+
+</mapper>
