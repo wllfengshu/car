@@ -1,8 +1,10 @@
 package com.wllfengshu.car.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.wllfengshu.car.auth.Auth;
 import com.wllfengshu.car.dao.TbCarRepairDAO;
-import com.wllfengshu.car.model.entity.TbCarRepairEntity;
 import com.wllfengshu.car.exception.CustomException;
+import com.wllfengshu.car.model.entity.TbCarRepairEntity;
 import com.wllfengshu.car.service.TbCarRepairService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class TbCarRepairServiceImpl implements TbCarRepairService {
     @NonNull
     private TbCarRepairDAO tbCarRepairDAO;
 
+    @Auth
     @Override
     public Map<String, Object> insert(TbCarRepairEntity entity, String sessionId) throws CustomException {
         log.info("insert entity:{}", entity);
@@ -31,6 +34,7 @@ public class TbCarRepairServiceImpl implements TbCarRepairService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> delete(Integer id, String sessionId) throws CustomException {
         log.info("delete id:{}", id);
@@ -39,6 +43,7 @@ public class TbCarRepairServiceImpl implements TbCarRepairService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> update(TbCarRepairEntity entity, String sessionId) throws CustomException {
         log.info("update entity:{}", entity);
@@ -47,6 +52,7 @@ public class TbCarRepairServiceImpl implements TbCarRepairService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> select(Integer id, String sessionId) throws CustomException {
         log.info("select id:{}", id);
@@ -55,10 +61,13 @@ public class TbCarRepairServiceImpl implements TbCarRepairService {
         return result;
     }
 
+    @Auth
     @Override
-    public Map<String, Object> selects(Map<String, Object> params, String sessionId) throws CustomException {
+    public Map<String, Object> selects(Map<String, Object> params, Integer pageNo, Integer pageSize, String sessionId) throws CustomException {
         log.info("selects params:{}", params);
         Map<String, Object> result = new HashMap<>();
+        PageHelper.startPage(pageNo, pageSize);
+        result.put("data", tbCarRepairDAO.selects(params));
         return result;
     }
 

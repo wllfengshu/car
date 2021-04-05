@@ -1,17 +1,19 @@
 package com.wllfengshu.car.rest;
 
-import com.wllfengshu.car.model.entity.TbCustomerEntity;
 import com.wllfengshu.car.exception.CustomException;
+import com.wllfengshu.car.model.entity.TbCustomerEntity;
 import com.wllfengshu.car.service.TbCustomerService;
 import io.swagger.annotations.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Api(value = "tbCustomer Rest",tags = "tbCustomer管理")
@@ -105,15 +107,33 @@ public class TbCustomerRest {
     })
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Map<String, Object> selects(
+            @RequestParam(value = "customerName", required = false) String customerName,
+            @RequestParam(value = "customerNickname", required = false) String customerNickname,
+            @RequestParam(value = "phone", required = false) String phone,
+            @RequestParam(value = "otherContacts", required = false) String otherContacts,
+            @RequestParam(value = "licensePlate", required = false) String licensePlate,
             @RequestParam(value = "pageNo", required = false, defaultValue = "0") Integer pageNo,
             @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize,
             @RequestHeader(value = "sessionId") String sessionId,
             HttpServletRequest request,
             HttpServletResponse response) throws CustomException {
         Map<String, Object> params = new HashMap<>();
-        params.put("pageNo", pageNo);
-        params.put("pageSize", pageSize);
+        if (StringUtils.isNoneEmpty(customerName)) {
+            params.put("customerName", "%" + customerName + "%");
+        }
+        if (StringUtils.isNoneEmpty(customerNickname)) {
+            params.put("customerNickname", "%" + customerNickname + "%");
+        }
+        if (StringUtils.isNoneEmpty(phone)) {
+            params.put("phone", "%" + phone + "%");
+        }
+        if (StringUtils.isNoneEmpty(otherContacts)) {
+            params.put("otherContacts", "%" + otherContacts + "%");
+        }
+        if (StringUtils.isNoneEmpty(licensePlate)) {
+            params.put("licensePlate", "%" + licensePlate + "%");
+        }
         log.info("selects params{}", params);
-        return tbCustomerService.selects(params, sessionId);
+        return tbCustomerService.selects(params, pageNo, pageSize, sessionId);
     }
 }

@@ -1,9 +1,10 @@
 package com.wllfengshu.car.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.wllfengshu.car.auth.Auth;
 import com.wllfengshu.car.dao.TbCarDAO;
-import com.wllfengshu.car.model.entity.TbCarEntity;
 import com.wllfengshu.car.exception.CustomException;
+import com.wllfengshu.car.model.entity.TbCarEntity;
 import com.wllfengshu.car.service.TbCarService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class TbCarServiceImpl implements TbCarService {
     @NonNull
     private TbCarDAO tbCarDAO;
 
+    @Auth
     @Override
     public Map<String, Object> insert(TbCarEntity entity, String sessionId) throws CustomException {
         log.info("insert entity:{}", entity);
@@ -32,6 +34,7 @@ public class TbCarServiceImpl implements TbCarService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> delete(Integer id, String sessionId) throws CustomException {
         log.info("delete id:{}", id);
@@ -40,6 +43,7 @@ public class TbCarServiceImpl implements TbCarService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> update(TbCarEntity entity, String sessionId) throws CustomException {
         log.info("update entity:{}", entity);
@@ -48,6 +52,7 @@ public class TbCarServiceImpl implements TbCarService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> select(Integer id, String sessionId) throws CustomException {
         log.info("select id:{}", id);
@@ -56,6 +61,7 @@ public class TbCarServiceImpl implements TbCarService {
         return result;
     }
 
+    @Auth
     @Override
     public Map<String, Object> selects(Map<String, Object> params, Integer pageNo, Integer pageSize, String sessionId) throws CustomException {
         log.info("selects params:{}", params);

@@ -27,7 +27,7 @@ public class LoggedUser {
         if (null == sessionVO) {
             return false;
         }
-        if (TimeUtil.checkDateSameDay(sessionVO.getCreateTime(), new Date())) {
+        if (!TimeUtil.checkDateSameDay(sessionVO.getCreateTime(), new Date())) {
             return false;
         }
         return true;

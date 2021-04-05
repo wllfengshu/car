@@ -15,6 +15,6 @@ public interface TbCarWashService {
 
     Map<String, Object> select(Integer id, String sessionId) throws CustomException;
 
-    Map<String, Object> selects(Map<String, Object> params, String sessionId) throws CustomException;
+    Map<String, Object> selects(Map<String, Object> params, Integer pageNo, Integer pageSize, String sessionId) throws CustomException;
 
 }

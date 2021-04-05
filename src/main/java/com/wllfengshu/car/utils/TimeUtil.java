@@ -20,10 +20,6 @@ public class TimeUtil {
 
     /**
      * 判断两个时间是否是同一天
-     *
-     * @param a
-     * @param b
-     * @return
      */
     public static boolean checkDateSameDay(@NonNull Date a,@NonNull Date b){
         SimpleDateFormat sdf = new SimpleDateFormat(Constant.FORMAT_DEFAULT);
