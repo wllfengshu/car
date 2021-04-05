@@ -14,6 +14,13 @@ public class SessionVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String loginName;
+    private String name;
+    private String phone;
+    private String wechat;
+    private String address;
+    private String post;
+
     private String sessionId;
     private Date createTime;
 }

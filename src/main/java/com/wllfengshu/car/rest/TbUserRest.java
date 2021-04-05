@@ -2,6 +2,7 @@ package com.wllfengshu.car.rest;
 
 import com.wllfengshu.car.exception.CustomException;
 import com.wllfengshu.car.model.dto.LoginDTO;
+import com.wllfengshu.car.model.dto.RepwdDTO;
 import com.wllfengshu.car.model.entity.TbUserEntity;
 import com.wllfengshu.car.service.TbUserService;
 import io.swagger.annotations.*;
@@ -125,5 +126,13 @@ public class TbUserRest {
     public Map<String, Object> logout(@RequestHeader(value = "sessionId") String sessionId) throws CustomException {
         log.info("logout sessionId:{}", sessionId);
         return tbUserService.logout(sessionId);
+    }
+
+    @ApiOperation(value = "修改密码", httpMethod = "POST")
+    @PostMapping("/tbUser/repwd")
+    public Map<String, Object> repwd(@RequestHeader(value = "sessionId") String sessionId,
+                                     @RequestBody RepwdDTO repwdDTO) throws CustomException {
+        log.info("repwd repwdDTO:{}", repwdDTO.getLoginName());
+        return tbUserService.repwd(repwdDTO, sessionId);
     }
 }

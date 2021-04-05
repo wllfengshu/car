@@ -1,8 +1,9 @@
 package com.wllfengshu.car.service;
 
-import com.wllfengshu.car.model.dto.LoginDTO;
-import com.wllfengshu.car.model.entity.TbUserEntity;
 import com.wllfengshu.car.exception.CustomException;
+import com.wllfengshu.car.model.dto.LoginDTO;
+import com.wllfengshu.car.model.dto.RepwdDTO;
+import com.wllfengshu.car.model.entity.TbUserEntity;
 
 import java.util.Map;
 
@@ -21,4 +22,6 @@ public interface TbUserService {
     Map<String, Object> login(LoginDTO loginDTO) throws CustomException;
 
     Map<String, Object> logout(String sessionId) throws CustomException;
+
+    Map<String, Object> repwd(RepwdDTO repwdDTO, String sessionId) throws CustomException;
 }

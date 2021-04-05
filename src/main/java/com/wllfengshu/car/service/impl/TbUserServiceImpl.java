@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.wllfengshu.car.auth.Auth;
 import com.wllfengshu.car.dao.TbUserDAO;
 import com.wllfengshu.car.model.dto.LoginDTO;
+import com.wllfengshu.car.model.dto.RepwdDTO;
 import com.wllfengshu.car.model.entity.TbUserEntity;
 import com.wllfengshu.car.exception.CustomException;
 import com.wllfengshu.car.model.vo.SessionVO;
@@ -85,7 +86,7 @@ public class TbUserServiceImpl implements TbUserService {
     public Map<String, Object> login(LoginDTO loginDTO) throws CustomException {
         Map<String, Object> result = new HashMap<>();
 
-        if (StringUtils.isEmpty(loginDTO.getLoginName())) {
+        if (StringUtils.isEmpty(loginDTO.getLoginName()) || StringUtils.isEmpty(loginDTO.getPassword())) {
             log.error("用户名或者密码不能为空！");
             throw new CustomException("用户名或者密码不能为空！", CustomException.ExceptionName.NOTNULL_USERNAME_OR_PASSWORD);
         }
@@ -105,6 +106,14 @@ public class TbUserServiceImpl implements TbUserService {
         sessionVO.setSessionId(UUID.randomUUID().toString());
         sessionVO.setCreateTime(new Date());
 
+        TbUserEntity tbUserEntity = tbUserEntities.get(0);
+        sessionVO.setLoginName(tbUserEntity.getLoginName());
+        sessionVO.setName(tbUserEntity.getName());
+        sessionVO.setPhone(tbUserEntity.getPhone());
+        sessionVO.setWechat(tbUserEntity.getWechat());
+        sessionVO.setAddress(tbUserEntity.getAddress());
+        sessionVO.setPost(tbUserEntity.getPost());
+
         LoggedUser.login(sessionVO);
         result.put("data", sessionVO);
         return result;
@@ -115,6 +124,39 @@ public class TbUserServiceImpl implements TbUserService {
     public Map<String, Object> logout(String sessionId) throws CustomException {
         Map<String, Object> result = new HashMap<>();
         LoggedUser.logout(sessionId);
+        result.put("operation", "success");
+        return result;
+    }
+
+    @Auth
+    @Override
+    public Map<String, Object> repwd(RepwdDTO repwdDTO, String sessionId) throws CustomException {
+        Map<String, Object> result = new HashMap<>();
+        if (StringUtils.isEmpty(repwdDTO.getOldPwd()) || StringUtils.isEmpty(repwdDTO.getNewPwd1()) || StringUtils.isEmpty(repwdDTO.getNewPwd2())) {
+            log.error("输入的密码不能为空！");
+            throw new CustomException("输入的密码不能为空！", CustomException.ExceptionName.ILLEGAL_PARAM);
+        }
+        if (!repwdDTO.getNewPwd1().equals(repwdDTO.getNewPwd2())) {
+            log.error("两次密码不一致！");
+            throw new CustomException("两次密码不一致！", CustomException.ExceptionName.THE_TWO_PASSWORDS_ARE_INCONSISTENT);
+        }
+        if (!repwdDTO.getLoginName().equals(LoggedUser.getSession(sessionId).getLoginName())) {
+            log.error("不得修改其他用户的数据！");
+            throw new CustomException("不得修改其他用户的数据！", CustomException.ExceptionName.ILLEGAL_PARAM);
+        }
+
+        LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setLoginName(repwdDTO.getLoginName());
+        loginDTO.setPassword(repwdDTO.getOldPwd());
+        this.login(loginDTO);
+
+        Example example = new Example(TbUserEntity.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("loginName", loginDTO.getLoginName());
+        TbUserEntity user = new TbUserEntity();
+        user.setPassword(DigestUtils.md5Hex(repwdDTO.getNewPwd1()));
+        tbUserDAO.updateByExampleSelective(user, example);
+
         result.put("operation", "success");
         return result;
     }

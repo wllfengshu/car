@@ -19,7 +19,8 @@ public class CustomException extends Exception {
         NOTNULL_USERNAME_OR_PASSWORD(10001),
         //用户名或者密码错误
         INVALID_USERNAME_OR_PASSWORD(10002),
-
+        //两次密码不一致
+        THE_TWO_PASSWORDS_ARE_INCONSISTENT(10003),
         ;
 
         private int code;

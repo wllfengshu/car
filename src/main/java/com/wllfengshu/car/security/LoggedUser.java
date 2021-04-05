@@ -22,8 +22,12 @@ public class LoggedUser {
 
     private static final Map<String, SessionVO> LOGGED_USER_MAP = new HashMap<>(1);
 
+    public static SessionVO getSession(String sessionId) {
+        return LOGGED_USER_MAP.get(sessionId);
+    }
+
     public static boolean hasLogin(String sessionId) {
-        SessionVO sessionVO = LOGGED_USER_MAP.get(sessionId);
+        SessionVO sessionVO = getSession(sessionId);
         if (null == sessionVO) {
             return false;
         }
