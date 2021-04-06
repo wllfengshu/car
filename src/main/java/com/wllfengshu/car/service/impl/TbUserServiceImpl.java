@@ -55,7 +55,10 @@ public class TbUserServiceImpl implements TbUserService {
     public Map<String, Object> update(TbUserEntity entity, String sessionId) throws CustomException {
         log.info("update entity:{}", entity);
         Map<String, Object> result = new HashMap<>();
-        tbUserDAO.updateByPrimaryKey(entity);
+        Example example = new Example(TbUserEntity.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("loginName", entity.getLoginName());
+        tbUserDAO.updateByExampleSelective(entity, example);
         return result;
     }
 
