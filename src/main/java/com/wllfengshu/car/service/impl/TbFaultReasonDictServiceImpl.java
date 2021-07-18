@@ -70,7 +70,7 @@ public class TbFaultReasonDictServiceImpl implements TbFaultReasonDictService {
         PageHelper.startPage(pageNo, pageSize);
         PageInfo<TbFaultReasonDictEntity> pageInfo = new PageInfo<>(tbFaultReasonDictDAO.selectAll());
         result.put("data", pageInfo.getList());
-        result.put("count", pageInfo.getSize());
+        result.put("count", pageInfo.getTotal());
         return result;
     }
 

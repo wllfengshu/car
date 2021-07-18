@@ -71,7 +71,7 @@ public class TbCarRepairServiceImpl implements TbCarRepairService {
         PageHelper.startPage(pageNo, pageSize);
         PageInfo<CarRepairVO> pageInfo = new PageInfo<>(tbCarRepairDAO.selects(params));
         result.put("data", pageInfo.getList());
-        result.put("count", pageInfo.getSize());
+        result.put("count", pageInfo.getTotal());
         return result;
     }
 
