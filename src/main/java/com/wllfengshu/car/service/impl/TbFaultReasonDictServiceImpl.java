@@ -1,6 +1,7 @@
 package com.wllfengshu.car.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wllfengshu.car.auth.Auth;
 import com.wllfengshu.car.dao.TbFaultReasonDictDAO;
 import com.wllfengshu.car.exception.CustomException;
@@ -67,7 +68,9 @@ public class TbFaultReasonDictServiceImpl implements TbFaultReasonDictService {
         log.info("selects params:{}", params);
         Map<String, Object> result = new HashMap<>();
         PageHelper.startPage(pageNo, pageSize);
-        result.put("data", tbFaultReasonDictDAO.selectAll());
+        PageInfo<TbFaultReasonDictEntity> pageInfo = new PageInfo<>(tbFaultReasonDictDAO.selectAll());
+        result.put("data", pageInfo.getList());
+        result.put("count", pageInfo.getSize());
         return result;
     }
 
